@@ -27,7 +27,7 @@ export default function Header() {
         {/* MIDDLE */}
         <div className="relative mt-2">
           <div className="absolute top-2 left-2">
-            <SearchIcon class="h-5 text-gray-500" />
+            <SearchIcon className="h-5 text-gray-500" />
           </div>
           <input
             type="text"
