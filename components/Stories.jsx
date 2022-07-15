@@ -15,7 +15,7 @@ const Stories = () => {
     setStoryUsers(fakeUsersData);
   }, []);
   return (
-    <div>
+    <div className="flex space-x-2 p-6 bg-white mt-8 border-gray-200 border-1 overflow-x-scroll rounded-sm">
       {storyUsers.map(({ username, img, id }) => (
         <Story key={id} username={username} img={img} />
       ))}
