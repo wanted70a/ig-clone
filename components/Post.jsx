@@ -3,6 +3,7 @@ import {
   HeartIcon,
   ChatIcon,
   BookmarkIcon,
+  EmojiHappyIcon,
 } from "@heroicons/react/outline";
 
 const Post = ({ username, userImg, img, caption }) => {
@@ -28,6 +29,21 @@ const Post = ({ username, userImg, img, caption }) => {
         </div>
         <BookmarkIcon className="btn" />
       </div>
+      {/* {COMMETNS} */}
+      <p className="p-5 truncate">
+        <span className="font-bold mr-2">{username}</span>
+        <span>{caption}</span>
+      </p>
+      {/* Input Box */}
+      <form action="" className="flex items-center">
+        <EmojiHappyIcon className="h-7" />
+        <input
+          className="border-none flex-1 focus:ring-0"
+          type="text"
+          placeholder="enter your comment..."
+        />
+        <button className="font-blue text-bold">Post</button>
+      </form>
     </div>
   );
 };
