@@ -2,8 +2,10 @@ import React from "react";
 import Image from "next/image";
 import { SearchIcon, PlusCircleIcon } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Header() {
+  const { data: session, status } = useSession();
   return (
     <div className="shadow-sm border-b sticky top-0 bg-white z-30">
       <div className="flex items-center justify-between max-w-6xl mx-4 xl:mx-auto">
@@ -12,7 +14,7 @@ export default function Header() {
           <Image
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2560px-Instagram_logo.svg.png"
             layout="fill"
-            className="object-contain"
+            className="object-contain cursor-pointer"
             alt="iglogo"
           />
         </div>
@@ -36,15 +38,20 @@ export default function Header() {
           />
         </div>
         {/* RIGHT */}
-        <div className="flex space-x-4 items-center">
-          <HomeIcon className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
-          <PlusCircleIcon className="h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
-          <img
-            src="https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg"
-            alt="user image"
-            className="h-10 rounded-full"
-          />
-        </div>
+        {session ? (
+          <div className="flex space-x-4 items-center">
+            <HomeIcon className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+            <PlusCircleIcon className="h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+            <img
+              onClick={signOut}
+              src={session?.user?.image}
+              alt="user image"
+              className="h-10 rounded-full"
+            />
+          </div>
+        ) : (
+          <button onClick={signIn}>Log in</button>
+        )}
       </div>
     </div>
   );
