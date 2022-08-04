@@ -5,10 +5,12 @@ import { HomeIcon } from "@heroicons/react/solid";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRecoilState } from "recoil";
 import { modalState } from "../atom/modalAtom";
+import { useRouter } from "next/router";
 
 export default function Header() {
   const { data: session, status } = useSession();
   const [showModal, setShowModal] = useRecoilState(modalState);
+  const router = useRouter();
 
   return (
     <div className="shadow-sm border-b sticky top-0 bg-white z-30">
@@ -20,6 +22,7 @@ export default function Header() {
             layout="fill"
             className="object-contain cursor-pointer"
             alt="iglogo"
+            onClick={() => router.push("/")}
           />
         </div>
         <div className="h-24 w-10 relative lg:hidden cursor-pointer">
@@ -28,6 +31,7 @@ export default function Header() {
             layout="fill"
             className="object-contain"
             alt="iglogo"
+            onClick={() => router.push("/")}
           />
         </div>
         {/* MIDDLE */}
@@ -44,7 +48,10 @@ export default function Header() {
         {/* RIGHT */}
         {session ? (
           <div className="flex space-x-4 items-center">
-            <HomeIcon className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+            <HomeIcon
+              onClick={() => router.push("/")}
+              className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out"
+            />
             <PlusCircleIcon
               onClick={() => setShowModal(true)}
               className="h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out"
